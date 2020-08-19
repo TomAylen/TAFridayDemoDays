@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: "tafridaydemok8s-910f"
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: "tafridaydemok8s-910f"
+    spec:
+      containers:
+        - name: "tafridaydemok8s-910f"
+          image: "tafridaydemocontainerregistry.azurecr.io/tafridaydemok8s"
+          ports:
+          - containerPort: 8080
