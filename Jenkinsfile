@@ -1,5 +1,5 @@
 pipeline {
-      agent none
+      agent any
       environment {
            SG_CLIENT_ID = credentials("SG_CLIENT_ID")
            SG_SECRET_KEY = credentials("SG_SECRET_KEY")
@@ -18,18 +18,17 @@ pipeline {
   
           }
     stage('SourceGuard Code Scan') {   
-          agent {
-             docker  { image 'sourceguard/sourceguard-cli:latest'
-                     label 'docker' }
-              }  
-                   
        steps {   
                    
          script {      
               try {
-                    
-         sh "/sourceguard-cli --src ./"
          
+               
+            
+                sh 'chmod +x sourceguard-cli' 
+
+                sh './sourceguard-cli --src .'
+           
                } catch (Exception e) {
     
                  echo "Code Analysis is BLOCK and recommend not using the source code"  
@@ -40,8 +39,8 @@ pipeline {
            
            
           stage('Docker image Build and scan prep') {
-           
-                steps {
+             
+            steps {
 
               sh 'docker build -t taylen/tafridaydemo .'
               sh 'docker save taylen/tafridaydemo -o tafridaydemo.tar'
@@ -49,19 +48,14 @@ pipeline {
              } 
            }
        stage('SourceGuard Container Image Scan') {   
-            agent {
-             docker  { image 'sourceguard/sourceguard-cli:latest'
-                     label 'docker' }
-              }  
           steps {   
                    
            
          
-                    sh "/sourceguard-cli --img tafridaydemo.tar"
+                    sh './sourceguard-cli --img tafridaydemo.tar'
            
                 }
-             
-            
+                        
             }
             
            
