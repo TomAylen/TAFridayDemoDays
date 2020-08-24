@@ -49,9 +49,10 @@ pipeline {
              } 
            }
        stage('SourceGuard Container Image Scan') {   
-             agent {
-               { docker 'sourceguard/sourceguard-cli' }
-              }
+            agent {
+             docker  { image 'sourceguard/sourceguard-cli:latest'
+                     label 'docker' }
+              }  
           steps {   
                    
            
