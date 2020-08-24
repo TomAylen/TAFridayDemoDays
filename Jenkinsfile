@@ -19,9 +19,10 @@ pipeline {
           }
     stage('SourceGuard Code Scan') {   
           agent {
-               { docker 'sourceguard/sourceguard-cli:latest' }
-              }        
-          
+             docker  { image 'sourceguard/sourceguard-cli:latest'
+                     label 'docker' }
+              }  
+                   
        steps {   
                    
          script {      
