@@ -4,7 +4,7 @@ pipeline {
            SG_CLIENT_ID = credentials("SG_CLIENT_ID")
            SG_SECRET_KEY = credentials("SG_SECRET_KEY")
             registry = "taylen/tafridaydemo"
-            registryCredential = 'dockerhub
+            registryCredential = 'dockerhub'
             dockerImage = ''
 
         }
