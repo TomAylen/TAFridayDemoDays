@@ -32,9 +32,7 @@ pipeline {
            
            
           stage('Docker image Build and scan prep') {
-             def dockerHome = tool 'tadocker'
-             env.PATH = "${dockerHome}/bin:${env.PATH}"
-            steps {
+             steps {
 
               sh 'docker build -t taylen/tafridaydemo .'
               sh 'docker save taylen/tafridaydemo -o tafridaydemo.tar'
