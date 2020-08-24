@@ -19,6 +19,11 @@ pipeline {
   
           }
     stage('SourceGuard Code Scan') {   
+          agent {
+
+              docker { image 'sourceguard/sourceguard-cli' }
+
+              }
        steps {   
                    
          script {      
@@ -40,20 +45,29 @@ pipeline {
            
            
           stage('Docker image Build and scan prep') {
-             
+             agent {
+
+              docker { image 'sourceguard/sourceguard-cli' }
+
+              }
             steps {
 
-              sh 'docker build -t dhouari/sg .'
-              sh 'docker save dhouari/sg -o sg.tar'
+              sh 'docker build -t taylen/tafridaydemo .'
+              sh 'docker save taylen/tafridaydemo -o tafridaydemo.tar'
               
              } 
            }
        stage('SourceGuard Container Image Scan') {   
+             agent {
+
+              docker { image 'sourceguard/sourceguard-cli' }
+
+              }
           steps {   
                    
            
          
-                    sh './sourceguard-cli --img sg.tar'
+                    sh './sourceguard-cli --img tafridaydemo.tar'
            
                 }
              
