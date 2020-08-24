@@ -1,5 +1,5 @@
 pipeline {
-      agent any
+      agent none
       environment {
            SG_CLIENT_ID = credentials("SG_CLIENT_ID")
            SG_SECRET_KEY = credentials("SG_SECRET_KEY")
@@ -19,10 +19,9 @@ pipeline {
           }
     stage('SourceGuard Code Scan') {   
           agent {
-
-              docker { image 'sourceguard/sourceguard-cli' }
-
-              }
+              docker { image 'sourceguard/sourceguard-cli:latest' }
+              }        
+          
        steps {   
                    
          script {      
