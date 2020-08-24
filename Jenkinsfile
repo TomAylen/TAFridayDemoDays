@@ -3,9 +3,8 @@ pipeline {
       environment {
            SG_CLIENT_ID = credentials("SG_CLIENT_ID")
            SG_SECRET_KEY = credentials("SG_SECRET_KEY")
-           registry = "https://hub.docker.com/repository/docker/taylen/tafridaydemo"
-           registryCredential = 'docker_hub'
-           dockerImage = 'checkpoint/sourceguard-cli'
+           registry = "https://registry.hub.docker.com"
+           dockerImage = 'dhouari/sg'
         }
   stages {
           
