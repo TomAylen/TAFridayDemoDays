@@ -28,13 +28,9 @@ pipeline {
                    
          script {      
               try {
+                    
+         sh "/sourceguard-cli --src ./"
          
-               
-            
-                sh 'chmod +x sourceguard-cli' 
-
-                sh './sourceguard-cli --src .'
-           
                } catch (Exception e) {
     
                  echo "Code Analysis is BLOCK and recommend not using the source code"  
@@ -45,12 +41,8 @@ pipeline {
            
            
           stage('Docker image Build and scan prep') {
-             agent {
-
-              docker { image 'sourceguard/sourceguard-cli' }
-
-              }
-            steps {
+           
+                steps {
 
               sh 'docker build -t taylen/tafridaydemo .'
               sh 'docker save taylen/tafridaydemo -o tafridaydemo.tar'
@@ -67,7 +59,7 @@ pipeline {
                    
            
          
-                    sh './sourceguard-cli --img tafridaydemo.tar'
+                    sh "/sourceguard-cli --img tafridaydemo.tar"
            
                 }
              
