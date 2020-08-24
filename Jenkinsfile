@@ -6,7 +6,10 @@ pipeline {
 
         }
   stages {
-          
+           stage('Initialize'){
+        def dockerHome = tool 'tadocker'
+        env.PATH = "${dockerHome}/bin:${env.PATH}"
+    }
          stage('Clone Github repository') {
             
     
