@@ -5,13 +5,7 @@ pipeline {
            SG_SECRET_KEY = credentials("SG_SECRET_KEY")
 
         }
-  stages {
-           
-        stage('Give Docker Awareness') {
-        def dockerHome = tool 'tadocker'
-        env.PATH = "${dockerHome}/bin:${env.PATH}"
-    }
-        
+  stages {         
          stage('Clone Github repository') {          
            steps {              
              checkout scm           
@@ -38,7 +32,8 @@ pipeline {
            
            
           stage('Docker image Build and scan prep') {
-             
+             def dockerHome = tool 'tadocker'
+             env.PATH = "${dockerHome}/bin:${env.PATH}"
             steps {
 
               sh 'docker build -t taylen/tafridaydemo .'
