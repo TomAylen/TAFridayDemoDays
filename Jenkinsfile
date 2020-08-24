@@ -6,17 +6,15 @@ pipeline {
 
         }
   stages {
-           stage('Initialize'){
+           
+        stage('Give Docker Awareness') {
         def dockerHome = tool 'tadocker'
         env.PATH = "${dockerHome}/bin:${env.PATH}"
     }
-         stage('Clone Github repository') {
-            
-    
-           steps {
-              
-             checkout scm
-           
+        
+         stage('Clone Github repository') {          
+           steps {              
+             checkout scm           
              }
   
           }
@@ -25,9 +23,7 @@ pipeline {
                    
          script {      
               try {
-         
-               
-            
+                                    
                 sh 'chmod +x sourceguard-cli' 
 
                 sh './sourceguard-cli --src .'
