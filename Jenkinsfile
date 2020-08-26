@@ -71,4 +71,13 @@ pipeline {
                   }
              }
     } 
+      
+ post {
+    failure {
+        mail to: 'taylen@checkpoint.com',
+             subject: "Failed Pipeline Run: ${currentBuild.fullDisplayName}",
+             body: "Something is wrong with ${env.BUILD_URL} - Go Check the pipeline to make sure there isnt a nasty blowout!"
+    }
+}     
+      
 }
